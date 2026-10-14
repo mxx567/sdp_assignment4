@@ -12,11 +12,13 @@ public class DownloaderFacade {
         if(!urlValidator.isValid(url)){
             throw new IllegalArgumentException("Invalid URL!");
         }
+        System.out.println("URL is valid");
 
         System.out.println(httpDownloader.OpenConnection(url));
         System.out.println(httpDownloader.ServerResponse(url));
 
         downloadedFile = httpDownloader.DownloadFile(url);
+        System.out.println(downloadedFile.getName() + " has been downloaded");
 
         fileVerifier.verify(downloadedFile);
         fileStorage.saveFile(downloadedFile,path);
