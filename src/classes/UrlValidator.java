@@ -8,6 +8,15 @@ public class UrlValidator {
             return false;
         }
 
-        return url.startsWith("http");
+        String path = java.net.URI.create(url).getPath();
+
+        if (path == null || path.endsWith("/")) {
+            return false;
+        }
+
+        String fileName = path.substring(path.lastIndexOf('/') + 1);
+        int dot = fileName.lastIndexOf('.');
+
+        return dot > 0 && dot < fileName.length() - 1;
     }
 }
